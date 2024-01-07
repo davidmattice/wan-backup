@@ -10,7 +10,7 @@ It will be necessary to connect either wirelessly or using a wired ethernet conn
 ## The environment for this use case is:
 * Samsung S21 on T-Mobile
 * Raspberry Pi 3+ - Raspberry Pi OS 11 (bullseye) - Lite edition (no desktop needed)
-* Ubiquiti USG-3P (4.4.56)
+* Ubiquiti USG-3P (4.4.56) AND Asus RT-AX3000 (3.0.0.4)
 
 ## Steps to configure the Pi:
 
@@ -73,6 +73,7 @@ It will be necessary to connect either wirelessly or using a wired ethernet conn
 
     Create the file: /etc/dnsmasq.conf
     ```
+    sudo cat >dnsmasq.conf <<EOF
     interface=eth0                 # Use interface eth0  
     listen-address=192.168.220.1   # Specify the address to listen on - Alternate address option: 172.31.0.1 (same as eth0 IP above)
     bind-dynamic                   # Bind to the interface
@@ -80,6 +81,8 @@ It will be necessary to connect either wirelessly or using a wired ethernet conn
     domain-needed                  # Don't forward short names  
     bogus-priv                     # Drop the non-routed address spaces.  
     dhcp-range=192.168.220.50,192.168.220.150,12h # IP range and lease time  - Alternate: 172.31.0.50,172.31.0.150,12h
+    EOF
+
     ```
 
 11. Update the firewall to allow forwarding of IPv4 traffic
@@ -97,7 +100,9 @@ It will be necessary to connect either wirelessly or using a wired ethernet conn
 13. Save the firewall rules so they can be reloaded on a reboot, otherwise they will be lost
     ```
     sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
+    sudo cat /etc/iptables.ipv4.nat
     ```
+    You can review the rules to see they include the ones created above.
 
 14. Configure the rules to be reloaded on a reboot
 
@@ -113,7 +118,7 @@ It will be necessary to connect either wirelessly or using a wired ethernet conn
     sudo reboot
     ```
 
-16. Once powered up you should be able to connect to the static IP on **eth0** from the connected device
+16. Once powered up you should be able to connect to the static IP on **eth0** from a lan connected device
 
     The **wlan0** interface should get an IP from the hotspot device when enabled
 
