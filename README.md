@@ -73,7 +73,7 @@ It will be necessary to connect either wirelessly or using a wired ethernet conn
 
     Create the file: /etc/dnsmasq.conf
     ```
-    sudo cat >dnsmasq.conf <<EOF
+    sudo cat >/etc/dnsmasq.conf <<EOF
     interface=eth0                 # Use interface eth0  
     listen-address=192.168.220.1   # Specify the address to listen on - Alternate address option: 172.31.0.1 (same as eth0 IP above)
     bind-dynamic                   # Bind to the interface
