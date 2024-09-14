@@ -1,4 +1,8 @@
 
+**NOTE: This file has been relocated to [this repo](https://github.com/davidmattice/Usefull_Documentation)**
+
+
+
 # Building a "Bridge" using a Raspberry Pi (for WAN backup)
 
 These steps can be used to setup a Raspberry Pi to act as a bridge between a Mobile Wireless Hotspot (or USB Tether) and an Ethernet connected device.  This can be a single device or a Router Wan connection.
